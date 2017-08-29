@@ -1,8 +1,6 @@
-# Photoshop files
 *.psd
 *.template
 
-# Folders or files with personal info
 *.csproj*
 *.zip
 *.user
