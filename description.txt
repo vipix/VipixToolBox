@@ -1,0 +1,42 @@
+This mod brings several utility tools with interfaces
+The interfaces may not respond at first, try alt-tabbing twice
+
+Don't forget to leave feedback !
+
+New items:
+- Smartammer (hammering interface)
+- Rattlesnake Wand
+- Color palette (paint interface)
+- Greater Wand (bloc wand interface)
+- Wall Hammer
+- Unstable Staff
+
+Modified items:
+- Staff of regrowth (moss color interface)
+
+------------
+v1.3.0
+- New tool: Unstable Staff. Similar to the Ice Rod, but it allows building levitating furniture
+- Added support for the World Builder Sould from Fargo's mod (gives near fullscreen range)
+- Made the /CenterUI command permanent for each player
+- Removed the pots, they already exist in Chad's mod
+v1.2.1
+- Added new command. Type /CenterUI followed by fixed, mouse, or free to enable each behaviour (more info on home page)
+- Extended some tool ranges
+v1.2.0
+- New tool: moss color choice added to the Staff of Regrowth with right-click
+- New functionality: you can disable/enable a color on the palette by right-click
+- Multiplayer support, attempt n°1 (I cannot test)
+- Smartammer and Wallhammer are now always available at the merchant (no boss condition)
+- Reduced damage of the hammers, but Smartammer will automatically gain damage in hardmode
+- Fixed typos
+- Updated some icons
+- Updated some effects
+v1.1.0
+- Fixed the version number because I forgot I needed 3 digits
+- Cleaned code for a simpler UI method
+- The Greater Wand interface now correctly appears around the mouse pointer
+- The Greater Wand no longer grants 50% chance not to consume wood when placing wood
+- Updated icons for Color Palette and Smartammer
+v1.0
+- Release

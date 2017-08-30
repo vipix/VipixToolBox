@@ -5,6 +5,8 @@
 *.zip
 *.user
 *.txt
+!build.txt
+!description.txt
 *.vs
 obj/
 bin/

@@ -10,7 +10,8 @@ namespace VipixToolBox.Items
 {
 	public class ColorPalette : ModItem
 	{
-		public int maxReach = 17;
+		public int baseRange = 17;
+		public int toolRange;
 		public bool operationAllowed = false;
 		public List<int> paints;
 
@@ -44,11 +45,12 @@ namespace VipixToolBox.Items
 		{
 			//for showing the icon when an action is allowed
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
-			if (Vector2.Distance(player.position , myPlayer.pointerCoord) < maxReach*16 && myPlayer.spotlight)
+			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
+			if (Vector2.Distance(player.position , myPlayer.pointerCoord) < toolRange*16 && myPlayer.spotlight)
 			{
 				Lighting.AddLight(myPlayer.pointerCoord, 2f, 2f, 2f);
 			}
-			if (Vector2.Distance(player.position , myPlayer.pointerCoord) < maxReach*16 && (myPlayer.pointedTile.active() || myPlayer.pointedTile.wall != 0))
+			if (Vector2.Distance(player.position , myPlayer.pointerCoord) < toolRange*16 && (myPlayer.pointedTile.active() || myPlayer.pointedTile.wall != 0))
 			{
 				player.showItemIcon = true;
 				operationAllowed = true;

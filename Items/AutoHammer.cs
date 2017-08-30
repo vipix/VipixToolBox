@@ -4,12 +4,14 @@ using Terraria.ModLoader;
 using Terraria.World.Generation;
 using Microsoft.Xna.Framework;
 using VipixToolBox.UI;
+using System;
 
 namespace VipixToolBox.Items
 {
 	public class AutoHammer : ModItem
 	{
-		public int maxReach = 12;
+		public int baseRange = 12;
+		public int toolRange;
 		public bool operationAllowed;
 
 		public override void SetStaticDefaults()
@@ -35,9 +37,10 @@ namespace VipixToolBox.Items
 		{
 			//for showing the icon when an action is allowed
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
+			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
 			if (myPlayer.pointedTile.active() &&
 			myPlayer.pointedTileAbove.type != TileID.Trees &&
-			Vector2.Distance(player.position, myPlayer.pointerCoord) < maxReach*16 &&
+			Vector2.Distance(player.position, myPlayer.pointerCoord) < toolRange*16 &&
 			Main.tileSolid[myPlayer.pointedTile.type])
 			{
 				//no edit under tree, probably other exceptions to add

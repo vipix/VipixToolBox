@@ -26,6 +26,7 @@ namespace VipixToolBox
 		public int mossTool;
 		public List<int> tempTileX;
 		public List<int> tempTileY;
+		public int fargoRange;
 		//continuous update (see PreUpdate())
 		public Vector2 pointerCoord;//coordinates of mouse pointer relatively to the world (top left of the world at 0,0)
 		public Tile pointedTile;
@@ -57,6 +58,10 @@ namespace VipixToolBox
 			treeList.Add(TileID.ChristmasTree);
 			treeList.Add(TileID.PalmTree);
 			centerUI = tag.GetInt("centerUI");
+		}
+		public override void ResetEffects()
+		{
+			fargoRange = 0;//resetting the UpdateAccessory of FargosModCompatibility
 		}
 	}
 }

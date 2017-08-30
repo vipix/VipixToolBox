@@ -1,0 +1,6 @@
+author = vipix
+version = 1.3.0
+displayName = VipixToolbox
+buildIgnore = *.psd, *.template, *.csproj, *.csproj.user, *.zip, *.user, obj\*, bin\*, .vs\*, *.txt, archive\*, .git\, *.gitignore
+includePDB = true
+homepage = https://forums.terraria.org/index.php?threads/vipix-toolbox.61305/
