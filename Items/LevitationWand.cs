@@ -13,9 +13,10 @@ namespace VipixToolBox.Items
 {
 	public class LevitationWand : ModItem
 	{
-		public int maxReach = 19;//blocks
+		public int baseRange = 20;
+		public int toolRange;
 		public bool operationAllowed;
-		public int manaDrain = 6;
+		public int manaDrain;
 
 		public override void SetStaticDefaults()
 		{
@@ -36,6 +37,8 @@ namespace VipixToolBox.Items
 			//item.UseSound = SoundID.Item1;
 			item.value = Item.buyPrice(0, 0, 40, 0);
 			item.autoReuse = true;
+
+			manaDrain = 6;
 		}
 
 		public override bool AltFunctionUse(Player player)
@@ -46,7 +49,11 @@ namespace VipixToolBox.Items
 		{
 			FlyingBlockTE myTE;
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
+			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
+
 			Tile tile = Main.tile[myPlayer.pointedTileX,myPlayer.pointedTileY];
+
+			Item fargotest = player.inventory[0];
 
 			//Main.tile[myPlayer.pointedTileX,myPlayer.pointedTileY].active(true);
 			//Main.tile[myPlayer.pointedTileX,myPlayer.pointedTileY].type = TileID.Dirt;//this doesnt respect tile properties
@@ -55,7 +62,7 @@ namespace VipixToolBox.Items
 			//also, we can't place tileEntity manually. At least we shouldn't try (cf documentation)
 
 			//next condition: checking reach, checking pointed block: should be either air or non solid block (like grass) but not trees (trees are non-solid too)
-			if (Vector2.Distance(player.position,myPlayer.pointerCoord) < maxReach*16 &&
+			if (Vector2.Distance(player.position,myPlayer.pointerCoord) < toolRange*16 &&
 					!myPlayer.pointedTile.active() || !Main.tileSolid[myPlayer.pointedTile.type] && !myPlayer.treeList.Contains(myPlayer.pointedTile.type))
 			{
 				if (player.altFunctionUse != 2 && player.statMana >= manaDrain)

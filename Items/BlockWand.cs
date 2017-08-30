@@ -11,7 +11,8 @@ namespace VipixToolBox.Items
 {
 	public class BlockWand : ModItem
 	{
-		public int maxReach = 12;//blocks
+		public int baseRange = 12;
+		public int toolRange;
 		public bool operationAllowed;
 		public List<int> toolList;
 		string[] toolNames = {"a","b","c","d","e","f"};
@@ -68,6 +69,7 @@ namespace VipixToolBox.Items
 				//it shows the item icon if true
 				//and it allows the actions in CanUseItem
 				VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
+				toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
 				//should have a connected solid tile (that is not empty nor a decorative element) or wall
 				//should also be empty or a non-solid tile
 				Tile tileTop = Main.tile[myPlayer.pointedTileX,myPlayer.pointedTileY - 1];
@@ -79,7 +81,7 @@ namespace VipixToolBox.Items
 				bool okLeft = tileLeft.active() && Main.tileSolid[tileLeft.type];
 				bool okRight = tileRight.active() && Main.tileSolid[tileRight.type];
 
-				if (Vector2.Distance(player.position,myPlayer.pointerCoord) < maxReach*16 &&
+				if (Vector2.Distance(player.position,myPlayer.pointerCoord) < toolRange*16 &&
 				(!myPlayer.pointedTile.active() || !Main.tileSolid[myPlayer.pointedTile.type] && !myPlayer.treeList.Contains(myPlayer.pointedTile.type))&&
 				(okTop || okBot || okLeft || okRight || myPlayer.pointedTile.wall != 0))
 				{
