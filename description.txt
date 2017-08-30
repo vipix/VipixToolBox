@@ -9,17 +9,20 @@ New items:
 - Color palette (paint interface)
 - Greater Wand (bloc wand interface)
 - Wall Hammer
+- Unstable Staff
 
 Modified items:
 - Staff of regrowth (moss color interface)
 
-Furnitures:
-- Breakable pots as normal furniture
-
 ------------
+v1.3.0
+- New tool: Unstable Staff. Similar to the Ice Rod, but it allows building levitating furniture
+- Added support for the World Builder Sould from Fargo's mod (gives near fullscreen range)
+- Made the /CenterUI command permanent for each player
+- Removed the pots, they already exist in Chad's mod
 v1.2.1
 - Added new command. Type /CenterUI followed by fixed, mouse, or free to enable each behaviour (more info on home page)
-- Extended some tool reaches
+- Extended some tool ranges
 v1.2.0
 - New tool: moss color choice added to the Staff of Regrowth with right-click
 - New functionality: you can disable/enable a color on the palette by right-click
