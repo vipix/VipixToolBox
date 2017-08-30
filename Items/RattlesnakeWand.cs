@@ -10,10 +10,11 @@ namespace VipixToolBox.Items
 {
 	public class RattlesnakeWand : ModItem
 	{
-		public int maxReach = 10;//blocks
 		public bool operationAllowed;
 		public List<int> sandList;
 		public List<int> hardenedSandList;
+		public int baseRange = 10;
+		public int toolRange;
 
 		public override void SetStaticDefaults()
 		{
@@ -62,8 +63,9 @@ namespace VipixToolBox.Items
 			//it shows the item icon if true
 			//and it allows the actions in CanUseItem
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
+			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
 
-			if (Vector2.Distance(player.position,myPlayer.pointerCoord) < maxReach*16 &&
+			if (Vector2.Distance(player.position,myPlayer.pointerCoord) < toolRange*16 &&
 			(sandList.Contains(myPlayer.pointedTile.type) || hardenedSandList.Contains(myPlayer.pointedTile.type)))
 			{
 				operationAllowed = true;

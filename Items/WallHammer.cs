@@ -2,12 +2,14 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using System;
 
 namespace VipixToolBox.Items
 {
 	public class WallHammer : ModItem
 	{
-		public int maxReach = 10;
+		public int baseRange = 10;
+		public int toolRange;
 		public bool operationAllowed;
 
 		public override void SetStaticDefaults()
@@ -33,7 +35,8 @@ namespace VipixToolBox.Items
 		public override void HoldItem (Player player)
 		{
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
-			if (Vector2.Distance(player.position, myPlayer.pointerCoord) < maxReach*16)
+			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
+			if (Vector2.Distance(player.position, myPlayer.pointerCoord) < toolRange*16)
 			{
 				operationAllowed = true;
 				player.showItemIcon = true;
