@@ -74,12 +74,12 @@ namespace VipixToolBox.Items
 			return true;
 		}
 		public override void AddRecipes()
-		{
+		{/*
 			ModRecipe recipe = new ModRecipe(mod);
 			//recipe.AddIngredient(ItemID.AntlionMandible, 2);
 			recipe.AddTile(TileID.WorkBenches);
 			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.AddRecipe();*/
 		}
 	}
 }
