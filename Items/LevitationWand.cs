@@ -85,6 +85,7 @@ namespace VipixToolBox.Items
 					WorldGen.KillTile(myPlayer.pointedTileX,myPlayer.pointedTileY, false, false, false);//otherwise, grass blocks the PlaceTile
 					WorldGen.PlaceTile(myPlayer.pointedTileX,myPlayer.pointedTileY, (ushort)mod.TileType("FlyingBlockTile"));//respects tile properties
 					//WorldGen.SquareTileFrame(myPlayer.pointedTileX, myPlayer.pointedTileY, true);
+					if (Main.netMode == 1) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
 					int id = mod.GetTileEntity<FlyingBlockTE>().Find(myPlayer.pointedTileX,myPlayer.pointedTileY);
 					if (id != -1)
 					{
@@ -101,6 +102,7 @@ namespace VipixToolBox.Items
 				{
 					WorldGen.KillTile(myPlayer.pointedTileX,myPlayer.pointedTileY, false, false, false);
 					WorldGen.PlaceTile(myPlayer.pointedTileX,myPlayer.pointedTileY, (ushort)mod.TileType("FlyingHardBlockTile"));
+					if (Main.netMode == 1) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
 					int id = mod.GetTileEntity<FlyingBlockTE>().Find(myPlayer.pointedTileX,myPlayer.pointedTileY);
 					if (id != -1)
 					{
