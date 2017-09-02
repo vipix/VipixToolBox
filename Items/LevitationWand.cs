@@ -49,17 +49,20 @@ namespace VipixToolBox.Items
 		{
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
 			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
+			
 			if (Vector2.Distance(player.position,myPlayer.pointerCoord) < toolRange*16 &&
-					!myPlayer.pointedTile.active() || !Main.tileSolid[myPlayer.pointedTile.type] && !myPlayer.treeList.Contains(myPlayer.pointedTile.type))
-					{
-						operationAllowed = true;
-						player.showItemIcon = true;
-					}
-					else
-					{
-						operationAllowed = false;
-						player.showItemIcon = false;
-					}
+			!myPlayer.pointedTile.active() || !Main.tileSolid[myPlayer.pointedTile.type] &&
+			!myPlayer.treeList.Contains(myPlayer.pointedTile.type) &&
+			VipixToolBox.toolEnabled["LevitationWand"])
+			{
+				operationAllowed = true;
+				player.showItemIcon = true;
+			}
+			else
+			{
+				operationAllowed = false;
+				player.showItemIcon = false;
+			}
 		}
 		public override bool CanUseItem(Player player)
 		{

@@ -17,6 +17,7 @@ Modified items:
 ------------
 v1.3.1
 - Fixed the way of obtaining the Smartammer
+- Added the /tool command to enable/disable tools
 v1.3.0
 - New tool: Unstable Staff. Similar to the Ice Rod, but it allows building levitating furniture
 - Added support for the World Builder Sould from Fargo's mod (gives near fullscreen range)
