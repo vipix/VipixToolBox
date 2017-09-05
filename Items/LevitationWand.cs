@@ -49,17 +49,20 @@ namespace VipixToolBox.Items
 		{
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
 			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
+
 			if (Vector2.Distance(player.position,myPlayer.pointerCoord) < toolRange*16 &&
-					!myPlayer.pointedTile.active() || !Main.tileSolid[myPlayer.pointedTile.type] && !myPlayer.treeList.Contains(myPlayer.pointedTile.type))
-					{
-						operationAllowed = true;
-						player.showItemIcon = true;
-					}
-					else
-					{
-						operationAllowed = false;
-						player.showItemIcon = false;
-					}
+			!myPlayer.pointedTile.active() || !Main.tileSolid[myPlayer.pointedTile.type] &&
+			!myPlayer.treeList.Contains(myPlayer.pointedTile.type) &&
+			VipixToolBoxWorld.toolEnabled["LevitationWand"])
+			{
+				operationAllowed = true;
+				player.showItemIcon = true;
+			}
+			else
+			{
+				operationAllowed = false;
+				player.showItemIcon = false;
+			}
 		}
 		public override bool CanUseItem(Player player)
 		{
@@ -85,6 +88,7 @@ namespace VipixToolBox.Items
 					WorldGen.KillTile(myPlayer.pointedTileX,myPlayer.pointedTileY, false, false, false);//otherwise, grass blocks the PlaceTile
 					WorldGen.PlaceTile(myPlayer.pointedTileX,myPlayer.pointedTileY, (ushort)mod.TileType("FlyingBlockTile"));//respects tile properties
 					//WorldGen.SquareTileFrame(myPlayer.pointedTileX, myPlayer.pointedTileY, true);
+					if (Main.netMode == 1) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
 					int id = mod.GetTileEntity<FlyingBlockTE>().Find(myPlayer.pointedTileX,myPlayer.pointedTileY);
 					if (id != -1)
 					{
@@ -101,6 +105,7 @@ namespace VipixToolBox.Items
 				{
 					WorldGen.KillTile(myPlayer.pointedTileX,myPlayer.pointedTileY, false, false, false);
 					WorldGen.PlaceTile(myPlayer.pointedTileX,myPlayer.pointedTileY, (ushort)mod.TileType("FlyingHardBlockTile"));
+					if (Main.netMode == 1) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
 					int id = mod.GetTileEntity<FlyingBlockTE>().Find(myPlayer.pointedTileX,myPlayer.pointedTileY);
 					if (id != -1)
 					{

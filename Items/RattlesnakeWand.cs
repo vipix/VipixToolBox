@@ -66,7 +66,8 @@ namespace VipixToolBox.Items
 			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
 
 			if (Vector2.Distance(player.position,myPlayer.pointerCoord) < toolRange*16 &&
-			(sandList.Contains(myPlayer.pointedTile.type) || hardenedSandList.Contains(myPlayer.pointedTile.type)))
+			(sandList.Contains(myPlayer.pointedTile.type) || hardenedSandList.Contains(myPlayer.pointedTile.type)) &&
+			VipixToolBoxWorld.toolEnabled["RattlesnakeWand"])
 			{
 				operationAllowed = true;
 				player.showItemIcon = true;

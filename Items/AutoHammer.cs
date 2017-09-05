@@ -41,7 +41,8 @@ namespace VipixToolBox.Items
 			if (myPlayer.pointedTile.active() &&
 			myPlayer.pointedTileAbove.type != TileID.Trees &&
 			Vector2.Distance(player.position, myPlayer.pointerCoord) < toolRange*16 &&
-			Main.tileSolid[myPlayer.pointedTile.type])
+			Main.tileSolid[myPlayer.pointedTile.type] &&
+			VipixToolBoxWorld.toolEnabled["AutoHammer"])
 			{
 				//no edit under tree, probably other exceptions to add
 				//empty tile is considered solid by Main.tileSolid, need to combine with tile.active()
@@ -74,12 +75,12 @@ namespace VipixToolBox.Items
 			return true;
 		}
 		public override void AddRecipes()
-		{
+		{/*
 			ModRecipe recipe = new ModRecipe(mod);
 			//recipe.AddIngredient(ItemID.AntlionMandible, 2);
 			recipe.AddTile(TileID.WorkBenches);
 			recipe.SetResult(this);
-			recipe.AddRecipe();
+			recipe.AddRecipe();*/
 		}
 	}
 }

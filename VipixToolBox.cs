@@ -59,34 +59,34 @@ namespace VipixToolBox
 			if (MouseTextIndex != -1)
 			{
 				layers.Insert(MouseTextIndex, new LegacyGameInterfaceLayer(
-					"Vipix Toolbox",
-					delegate
+				"Vipix Toolbox",
+				delegate
+				{
+					if (ColorUI.visible)
 					{
-						if (ColorUI.visible)
-						{
-							colorUserInterface.Update(Main._drawInterfaceGameTime);	//I don't understand
-							colorUI.Draw(Main.spriteBatch);
-						}
-						if (HammerUI.visible)
-						{
-							hammerUserInterface.Update(Main._drawInterfaceGameTime);	//I don't understand
-							hammerUI.Draw(Main.spriteBatch);
-						}
-						if (BlockUI.visible)
-						{
-							blockUserInterface.Update(Main._drawInterfaceGameTime);	//I don't understand
-							blockUI.Draw(Main.spriteBatch);
-						}
-						if (MossUI.visible)
-						{
-							mossUserInterface.Update(Main._drawInterfaceGameTime);
-							mossUI.Draw(Main.spriteBatch);
-						}
-						return true;
+						colorUserInterface.Update(Main._drawInterfaceGameTime);	//I don't understand
+						colorUI.Draw(Main.spriteBatch);
+					}
+					if (HammerUI.visible)
+					{
+						hammerUserInterface.Update(Main._drawInterfaceGameTime);	//I don't understand
+						hammerUI.Draw(Main.spriteBatch);
+					}
+					if (BlockUI.visible)
+					{
+						blockUserInterface.Update(Main._drawInterfaceGameTime);	//I don't understand
+						blockUI.Draw(Main.spriteBatch);
+					}
+					if (MossUI.visible)
+					{
+						mossUserInterface.Update(Main._drawInterfaceGameTime);
+						mossUI.Draw(Main.spriteBatch);
+					}
+					return true;
 					},
 					InterfaceScaleType.UI)
-				);
+					);
+				}
 			}
 		}
 	}
-}
