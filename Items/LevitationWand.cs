@@ -49,11 +49,11 @@ namespace VipixToolBox.Items
 		{
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
 			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
-			
+
 			if (Vector2.Distance(player.position,myPlayer.pointerCoord) < toolRange*16 &&
 			!myPlayer.pointedTile.active() || !Main.tileSolid[myPlayer.pointedTile.type] &&
 			!myPlayer.treeList.Contains(myPlayer.pointedTile.type) &&
-			VipixToolBox.toolEnabled["LevitationWand"])
+			VipixToolBoxWorld.toolEnabled["LevitationWand"])
 			{
 				operationAllowed = true;
 				player.showItemIcon = true;

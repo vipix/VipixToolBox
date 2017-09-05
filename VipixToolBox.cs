@@ -23,7 +23,6 @@ namespace VipixToolBox
 		internal HammerUI hammerUI;
 		internal BlockUI blockUI;
 		internal MossUI mossUI;
-		public static Dictionary<string, bool> toolEnabled;
 
 		public VipixToolBox()
 		{
@@ -33,15 +32,6 @@ namespace VipixToolBox
 				AutoloadGores = true,
 				AutoloadSounds = true
 			};
-			toolEnabled = new Dictionary<string, bool>();
-			toolEnabled.Add("all",false);
-			toolEnabled.Add("AutoHammer",true);
-			toolEnabled.Add("BlockWand",true);
-			toolEnabled.Add("ColorPalette",true);
-			toolEnabled.Add("LevitationWand",true);
-			toolEnabled.Add("RattlesnakeWand",true);
-			toolEnabled.Add("StaffofRegrowthEdit",true);
-			toolEnabled.Add("WallHammer",true);
 		}
 		public override void Load()
 		{

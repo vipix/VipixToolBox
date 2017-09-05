@@ -27,7 +27,7 @@ namespace VipixToolBox.Items
       VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
       bool moddedStaff = false;
       float maxReach = 5.5f;//blocks. With testing I find 6 longer than vanilla reach and 5 shorter that vanilla reach
-      if (item.type == ItemID.StaffofRegrowth && !VipixToolBox.toolEnabled["StaffofRegrowthEdit"])
+      if (item.type == ItemID.StaffofRegrowth && !VipixToolBoxWorld.toolEnabled["StaffofRegrowthEdit"])
       {
         if (player.altFunctionUse == 2)
         {

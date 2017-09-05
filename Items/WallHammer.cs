@@ -36,7 +36,7 @@ namespace VipixToolBox.Items
 		{
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
 			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
-			if (Vector2.Distance(player.position, myPlayer.pointerCoord) < toolRange*16 && VipixToolBox.toolEnabled["WallHammer"])
+			if (Vector2.Distance(player.position, myPlayer.pointerCoord) < toolRange*16 && VipixToolBoxWorld.toolEnabled["WallHammer"])
 			{
 				operationAllowed = true;
 				player.showItemIcon = true;
