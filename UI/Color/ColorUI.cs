@@ -56,9 +56,8 @@ namespace VipixToolBox.UI
 				buttonTexture = ModLoader.GetMod("VipixToolBox").GetTexture("UI/Color/" + i.ToString());
 				colorList.Add(new UIImageButton(buttonTexture));
 				disabledList.Add(new UIImageButton(ModLoader.GetMod("VipixToolBox").GetTexture("UI/Color/no")));
-				if (i != 0) backgroundPanel.Append(colorList[i]);
-				//the "no color" is done separately rather that considering it as a color
 			}
+			//
 			//positions generated mathematically
 			for (int i = 1; i < 13; i++)
 			{
@@ -124,14 +123,16 @@ namespace VipixToolBox.UI
 			toolList.Add(new UIImageButton(buttonTexture));
 			toolList[j].Left.Set(panelWidth/2 - 24f, 0f);
 			toolList[j].Top.Set(panelHeight/2 + 90f, 0f);
-			//adding all the buttonclicked methods
+			//adding all the buttonclicked methods and appending
 			for (int i = 0; i < colorList.Count; i++)
 			{
 				int index = i;
+				backgroundPanel.Append(colorList[i]);
 				colorList[i].OnClick += (evt, element) => ColorClicked(index);
 				colorList[i].OnRightClick += (evt, element) => DisableColor(index);
 				disabledList[i].OnRightClick += (evt, element) => EnableColor(index);
 			}
+			backgroundPanel.RemoveChild(colorList[0]);//erasing is made with eraser, not "null paint"
 			for (int i = 0; i < toolList.Count; i++)
 			{
 				int index = i;
