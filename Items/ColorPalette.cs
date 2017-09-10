@@ -46,11 +46,13 @@ namespace VipixToolBox.Items
 			//for showing the icon when an action is allowed
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
 			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
-			if (Vector2.Distance(player.position , myPlayer.pointerCoord) < toolRange*16 && myPlayer.spotlight)
+			if (Vector2.Distance(player.position , myPlayer.pointerCoord) < toolRange*16 && myPlayer.spotlight && VipixToolBoxWorld.toolEnabled["ColorPalette"])
 			{
 				Lighting.AddLight(myPlayer.pointerCoord, 2f, 2f, 2f);
 			}
-			if (Vector2.Distance(player.position , myPlayer.pointerCoord) < toolRange*16 && (myPlayer.pointedTile.active() || myPlayer.pointedTile.wall != 0))
+			if (Vector2.Distance(player.position , myPlayer.pointerCoord) < toolRange*16 &&
+			(myPlayer.pointedTile.active() || myPlayer.pointedTile.wall != 0)&&
+			VipixToolBoxWorld.toolEnabled["ColorPalette"])
 			{
 				player.showItemIcon = true;
 				operationAllowed = true;

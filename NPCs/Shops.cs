@@ -32,6 +32,11 @@ namespace VipixToolBox.NPCs
         shop.item[nextSlot].SetDefaults(mod.ItemType<Items.BlockWand>());
         nextSlot++;
       }
+      if (type == NPCID.Wizard)
+      {
+        shop.item[nextSlot].SetDefaults(mod.ItemType<Items.LevitationWand>());
+        nextSlot++;
+      }
     }
   }
 }

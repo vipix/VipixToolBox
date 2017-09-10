@@ -13,29 +13,29 @@ namespace VipixToolBox.Items
 {
 	public class LevitationWand : ModItem
 	{
-		public int baseRange = 20;
+		public int baseRange = 14;
 		public int toolRange;
 		public bool operationAllowed;
 		public int manaDrain;
 
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("TESTWand");
+			DisplayName.SetDefault("Unstable Staff");
+			Tooltip.SetDefault("It defies reason, and furniture\nCan be right-clicked");
 		}
 		public override void SetDefaults()
 		{
-			item.damage = 14;
-			item.useStyle = 5;
-			item.useAnimation = 8;
-			item.useTime = 8;
-			item.shootSpeed = 3.7f;
-			item.knockBack = 6.5f;
+			item.damage = 34;
+			item.useStyle = 1;
+			item.useAnimation = 12;
+			item.useTime = 12;
+			item.knockBack = 2f;
 			item.width = 32;
 			item.height = 32;
 			item.scale = 1f;
 			item.rare = 2;
 			//item.UseSound = SoundID.Item1;
-			item.value = Item.buyPrice(0, 0, 40, 0);
+			item.value = Item.buyPrice(0, 60, 0, 0);
 			item.autoReuse = true;
 
 			manaDrain = 6;
@@ -44,6 +44,25 @@ namespace VipixToolBox.Items
 		public override bool AltFunctionUse(Player player)
 		{
 			return true;
+		}
+		public override void HoldItem(Player player)
+		{
+			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
+			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
+
+			if (Vector2.Distance(player.position,myPlayer.pointerCoord) < toolRange*16 &&
+			!myPlayer.pointedTile.active() || !Main.tileSolid[myPlayer.pointedTile.type] &&
+			!myPlayer.treeList.Contains(myPlayer.pointedTile.type) &&
+			VipixToolBoxWorld.toolEnabled["LevitationWand"])
+			{
+				operationAllowed = true;
+				player.showItemIcon = true;
+			}
+			else
+			{
+				operationAllowed = false;
+				player.showItemIcon = false;
+			}
 		}
 		public override bool CanUseItem(Player player)
 		{
@@ -62,14 +81,14 @@ namespace VipixToolBox.Items
 			//also, we can't place tileEntity manually. At least we shouldn't try (cf documentation)
 
 			//next condition: checking reach, checking pointed block: should be either air or non solid block (like grass) but not trees (trees are non-solid too)
-			if (Vector2.Distance(player.position,myPlayer.pointerCoord) < toolRange*16 &&
-					!myPlayer.pointedTile.active() || !Main.tileSolid[myPlayer.pointedTile.type] && !myPlayer.treeList.Contains(myPlayer.pointedTile.type))
+			if (operationAllowed)
 			{
 				if (player.altFunctionUse != 2 && player.statMana >= manaDrain)
 				{
 					WorldGen.KillTile(myPlayer.pointedTileX,myPlayer.pointedTileY, false, false, false);//otherwise, grass blocks the PlaceTile
 					WorldGen.PlaceTile(myPlayer.pointedTileX,myPlayer.pointedTileY, (ushort)mod.TileType("FlyingBlockTile"));//respects tile properties
 					//WorldGen.SquareTileFrame(myPlayer.pointedTileX, myPlayer.pointedTileY, true);
+					if (Main.netMode == 1) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
 					int id = mod.GetTileEntity<FlyingBlockTE>().Find(myPlayer.pointedTileX,myPlayer.pointedTileY);
 					if (id != -1)
 					{
@@ -86,6 +105,7 @@ namespace VipixToolBox.Items
 				{
 					WorldGen.KillTile(myPlayer.pointedTileX,myPlayer.pointedTileY, false, false, false);
 					WorldGen.PlaceTile(myPlayer.pointedTileX,myPlayer.pointedTileY, (ushort)mod.TileType("FlyingHardBlockTile"));
+					if (Main.netMode == 1) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
 					int id = mod.GetTileEntity<FlyingBlockTE>().Find(myPlayer.pointedTileX,myPlayer.pointedTileY);
 					if (id != -1)
 					{

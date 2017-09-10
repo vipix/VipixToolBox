@@ -33,6 +33,7 @@ namespace VipixToolBox.Tiles
 				{
 					isDead = true;
 					Main.tile[tileX,tileY].active(false);
+					if (Main.netMode == 1) NetMessage.SendTileSquare(-1, tileX,tileY, 1);
 					Main.PlaySound(SoundID.Grass);
 					//WorldGen.SquareTileFrame(tileX,tileY+1, true);
 					//no proper worldgen update, so that objects keep flying
