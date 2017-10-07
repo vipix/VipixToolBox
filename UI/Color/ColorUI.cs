@@ -51,7 +51,13 @@ namespace VipixToolBox.UI
 			toolList = new List<UIImageButton>();
 			Texture2D buttonTexture;
 			//color buttons
-			for (int i = 0; i < 31; i++)
+			buttonTexture = ModLoader.GetMod("VipixToolBox").GetTexture("UI/Color/null");
+			colorList.Add(new UIImageButton(buttonTexture));
+			disabledList.Add(new UIImageButton(ModLoader.GetMod("VipixToolBox").GetTexture("UI/Color/no")));
+			colorList[0].Left.Set(0f,0f);
+			colorList[0].Top.Set(0f,0f);
+
+			for (int i = 1; i < 31; i++)
 			{
 				buttonTexture = ModLoader.GetMod("VipixToolBox").GetTexture("UI/Color/" + i.ToString());
 				colorList.Add(new UIImageButton(buttonTexture));
