@@ -10,11 +10,14 @@ New items:
 - Greater Wand (bloc wand interface)
 - Wall Hammer
 - Unstable Staff
+- Swap Pickaxe
 
 Modified items:
 - Staff of regrowth (moss color interface)
 
 ------------
+v1.4.0
+- New tool: Swap Pickaxe. Swaps blocks with the ones in your inventory but keeps all other characteristics
 v1.3.2
 - Fixed an icon
 - Mod icon introduced

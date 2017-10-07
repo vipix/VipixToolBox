@@ -37,6 +37,11 @@ namespace VipixToolBox.NPCs
         shop.item[nextSlot].SetDefaults(mod.ItemType<Items.LevitationWand>());
         nextSlot++;
       }
+      if (type == NPCID.Mechanic)
+      {
+        shop.item[nextSlot].SetDefaults(mod.ItemType<Items.SwapPickaxe>());
+        nextSlot++;
+      }
     }
   }
 }
