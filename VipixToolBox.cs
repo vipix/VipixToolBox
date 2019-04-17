@@ -10,6 +10,7 @@ using Terraria.UI;
 using Terraria.DataStructures;
 using Terraria.GameContent.UI;
 using VipixToolBox.UI;
+using VipixToolBox.Items;
 
 namespace VipixToolBox
 {
@@ -36,6 +37,7 @@ namespace VipixToolBox
 		public override void Load()
 		{
 			SetupClientUIs();
+			AddGlobalItem("StaffofRegrowthEdit", new StaffofRegrowthEdit());
 		}
 		
 		private void SetupClientUIs() {
