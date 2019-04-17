@@ -35,6 +35,14 @@ namespace VipixToolBox
 		}
 		public override void Load()
 		{
+			SetupClientUIs();
+		}
+		
+		private void SetupClientUIs() {
+			if (Main.netMode == 2)
+			{
+				return;
+			}
 			//Activation of the UIs
 			colorUI = new ColorUI();
 			hammerUI = new HammerUI();
@@ -53,6 +61,7 @@ namespace VipixToolBox
 			hammerUserInterface.SetState(hammerUI);
 			mossUserInterface.SetState(mossUI);
 		}
+		
 		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 		{
 			int MouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
