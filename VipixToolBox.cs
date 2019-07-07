@@ -10,6 +10,7 @@ using Terraria.UI;
 using Terraria.DataStructures;
 using Terraria.GameContent.UI;
 using VipixToolBox.UI;
+using VipixToolBox.Items;
 
 namespace VipixToolBox
 {
@@ -35,6 +36,15 @@ namespace VipixToolBox
 		}
 		public override void Load()
 		{
+			SetupClientUIs();
+			AddGlobalItem("StaffofRegrowthEdit", new StaffofRegrowthEdit());
+		}
+		
+		private void SetupClientUIs() {
+			if (Main.netMode == 2)
+			{
+				return;
+			}
 			//Activation of the UIs
 			colorUI = new ColorUI();
 			hammerUI = new HammerUI();
@@ -53,6 +63,7 @@ namespace VipixToolBox
 			hammerUserInterface.SetState(hammerUI);
 			mossUserInterface.SetState(mossUI);
 		}
+		
 		public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
 		{
 			int MouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
