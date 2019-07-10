@@ -16,6 +16,9 @@ Modified items:
 - Staff of regrowth (moss color interface)
 
 ------------
+v1.4.1
+- Staff of Regrowth fixed
+- Multiplayer enabled
 v1.4.0
 - New tool: Swap Pickaxe. Swaps blocks with the ones in your inventory but keeps all other characteristics
 v1.3.2
