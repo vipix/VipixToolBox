@@ -14,7 +14,6 @@ namespace VipixToolBox.Items
 		public int baseRange = 17;
 		public int toolRange;
 		public bool operationAllowed = false;
-		public List<int> paints;
 
 		public override void SetStaticDefaults()
 		{
@@ -23,16 +22,13 @@ namespace VipixToolBox.Items
 		}
 		public override void SetDefaults()
 		{
-			paints = new List<int>();
-			for (int i = 0; i < 27; i++) paints.Add(1073+i);//adding the item IDs from red paint to gray paint
-			for (int i = 0; i < 3; i++) paints.Add(1966+i);//the last three, brown, shadow and negative
 			item.width = 40;
 			item.height = 40;
 			item.useTime = 1;
 			item.useAnimation = 10;
-			item.useStyle = 1;
+			item.useStyle = ItemUseStyleID.SwingThrow;
 			item.value = Item.buyPrice(0, 50, 0, 0);
-			item.rare = 5;
+			item.rare = ItemRarityID.Pink;
 			item.UseSound = SoundID.Item1;
 			item.autoReuse = true;
 			item.noMelee = true;
@@ -44,39 +40,42 @@ namespace VipixToolBox.Items
 		}
 		public override void HoldItem (Player player)
 		{
-			//for showing the icon when an action is allowed
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
-			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
-			if (Vector2.Distance(player.position , myPlayer.pointerCoord) < toolRange*16 && myPlayer.spotlight && VipixToolBoxWorld.toolEnabled["ColorPalette"])
+			if (Main.netMode != NetmodeID.Server && myPlayer.CursorReady)
 			{
-				Lighting.AddLight(myPlayer.pointerCoord, 2f, 2f, 2f);
-			}
-			if (Vector2.Distance(player.position , myPlayer.pointerCoord) < toolRange*16 &&
-			(myPlayer.pointedTile.active() || myPlayer.pointedTile.wall != 0)&&
-			VipixToolBoxWorld.toolEnabled["ColorPalette"])
-			{
-				player.showItemIcon = true;
-				operationAllowed = true;
-				switch (myPlayer.paintStatus)
+				//for showing the icon when an action is allowed
+				toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
+				if (Vector2.Distance(player.Center, myPlayer.pointerCoord) < toolRange * 16 && myPlayer.spotlight && VipixToolBoxWorld.toolEnabled["ColorPalette"])
 				{
-					case 0:
-					player.showItemIcon2 = ModContent.ItemType<tilePaintIcon>();
-					break;
-					case 1:
-					player.showItemIcon2 = ModContent.ItemType<wallPaintIcon>();
-					break;
-					case 2:
-					player.showItemIcon2 = ModContent.ItemType<tileEraseIcon>();
-					break;
-					case 3:
-					player.showItemIcon2 = ModContent.ItemType<wallEraseIcon>();
-					break;
+					Lighting.AddLight(myPlayer.pointerCoord, 2f, 2f, 2f);
 				}
-			}
-			else
-			{
-				player.showItemIcon = false;
-				operationAllowed = false;
+				if (Vector2.Distance(player.Center, myPlayer.pointerCoord) < toolRange * 16 &&
+				(myPlayer.pointedTile.active() || myPlayer.pointedTile.wall != 0) &&
+				VipixToolBoxWorld.toolEnabled["ColorPalette"])
+				{
+					player.showItemIcon = true;
+					operationAllowed = true;
+					switch (myPlayer.paintStatus)
+					{
+						case 0:
+							player.showItemIcon2 = ModContent.ItemType<tilePaintIcon>();
+							break;
+						case 1:
+							player.showItemIcon2 = ModContent.ItemType<wallPaintIcon>();
+							break;
+						case 2:
+							player.showItemIcon2 = ModContent.ItemType<tileEraseIcon>();
+							break;
+						case 3:
+							player.showItemIcon2 = ModContent.ItemType<wallEraseIcon>();
+							break;
+					}
+				}
+				else
+				{
+					player.showItemIcon = false;
+					operationAllowed = false;
+				}
 			}
 		}
 		public override bool CanUseItem(Player player)
@@ -96,12 +95,12 @@ namespace VipixToolBox.Items
 					int i = 0;//need to check for resource first
 					bool found = false;
 					bool operationDone = false;
-					while (i < player.inventory.Length)
+					while (i < Main.maxInventory)
 					{
-						if (paints.Contains(player.inventory[i].type)) break;
+						if (VipixToolBox.paints.Contains(player.inventory[i].type)) break;
 						i++;
 					}
-					if (i < player.inventory.Length) found = true;
+					if (i < Main.maxInventory) found = true;
 					switch (myPlayer.paintStatus)
 					{
 						case 0:
@@ -138,7 +137,7 @@ namespace VipixToolBox.Items
 					}
 					if (operationDone)
 					{
-						if (Main.netMode == 1) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
+						if (Main.netMode == NetmodeID.MultiplayerClient) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
 						Main.PlaySound(SoundID.Dig);
 						Vector2 dustSpawn;
 						for (int j = 0;j < 10;j++)

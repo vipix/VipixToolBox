@@ -11,8 +11,6 @@ namespace VipixToolBox.Items
 	public class RattlesnakeWand : ModItem
 	{
 		public bool operationAllowed;
-		public List<int> sandList;
-		public List<int> hardenedSandList;
 		public int baseRange = 10;
 		public int toolRange;
 
@@ -24,7 +22,7 @@ namespace VipixToolBox.Items
 		public override void SetDefaults()
 		{
 			item.damage = 14;
-			item.useStyle = 5;
+			item.useStyle = ItemUseStyleID.HoldingOut;
 			item.useAnimation = 20;
 			item.useTime = 8;
 			item.shootSpeed = 3.7f;
@@ -32,25 +30,14 @@ namespace VipixToolBox.Items
 			item.width = 32;
 			item.height = 32;
 			item.scale = 1f;
-			item.rare = 2;
+			item.rare = ItemRarityID.Green;
 			item.UseSound = SoundID.Item1;
 			item.shoot = ModContent.ProjectileType<RattleSnakeWandProjectile>();
 			item.value = Item.buyPrice(0, 0, 40, 0);
-			item.noMelee = true; // Important because the spear is acutally a projectile instead of an item. This prevents the melee hitbox of this item.
+			item.noMelee = true; // Important because the spear is actually a projectile instead of an item. This prevents the melee hitbox of this item.
 			item.noUseGraphic = true; // Important, it's kind of wired if people see two spears at one time. This prevents the melee animation of this item.
 			item.melee = true;
 			item.autoReuse = true; // Most spears dont autoReuse, but it's possible
-
-			sandList = new List<int>();
-			sandList.Add(TileID.Sand);//alphabetical order
-			sandList.Add(TileID.Crimsand);
-			sandList.Add(TileID.Ebonsand);
-			sandList.Add(TileID.Pearlsand);
-			hardenedSandList = new List<int>();//mirror order of sands
-			hardenedSandList.Add(TileID.HardenedSand);
-			hardenedSandList.Add(TileID.CrimsonHardenedSand);
-			hardenedSandList.Add(TileID.CorruptHardenedSand);
-			hardenedSandList.Add(TileID.HallowHardenedSand);
 		}
 
 		public override bool AltFunctionUse(Player player)
@@ -59,23 +46,26 @@ namespace VipixToolBox.Items
 		}
 		public override void HoldItem(Player player)
 		{
-			//this method determines if the pointed block is a type of sand in range of the player
-			//it shows the item icon if true
-			//and it allows the actions in CanUseItem
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
-			toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
+			if (Main.netMode != NetmodeID.Server && myPlayer.CursorReady)
+			{
+				//this method determines if the pointed block is a type of sand in range of the player
+				//it shows the item icon if true
+				//and it allows the actions in CanUseItem
+				toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
 
-			if (Vector2.Distance(player.position,myPlayer.pointerCoord) < toolRange*16 &&
-			(sandList.Contains(myPlayer.pointedTile.type) || hardenedSandList.Contains(myPlayer.pointedTile.type)) &&
-			VipixToolBoxWorld.toolEnabled["RattlesnakeWand"])
-			{
-				operationAllowed = true;
-				player.showItemIcon = true;
-			}
-			else
-			{
-				operationAllowed = false;
-				player.showItemIcon = false;
+				if (Vector2.Distance(player.Center, myPlayer.pointerCoord) < toolRange * 16 &&
+				(VipixToolBox.sandList.Contains(myPlayer.pointedTile.type) || VipixToolBox.hardenedSandList.Contains(myPlayer.pointedTile.type)) &&
+				VipixToolBoxWorld.toolEnabled["RattlesnakeWand"])
+				{
+					operationAllowed = true;
+					player.showItemIcon = true;
+				}
+				else
+				{
+					operationAllowed = false;
+					player.showItemIcon = false;
+				}
 			}
 		}
 
@@ -87,22 +77,23 @@ namespace VipixToolBox.Items
 			{
 				if (player.altFunctionUse == 2)
 				{
-					int index = hardenedSandList.FindIndex(i => i == myPlayer.pointedTile.type);//exception at -1 if the wrong mouse button is used
-					if (index != -1) myPlayer.pointedTile.type = (ushort)sandList[index];
+					int index = VipixToolBox.hardenedSandList.FindIndex(i => i == myPlayer.pointedTile.type);//exception at -1 if the wrong mouse button is used
+					if (index != -1) myPlayer.pointedTile.type = (ushort)VipixToolBox.sandList[index];
 				}
 				else
 				{
-					int index = sandList.FindIndex(i => i == myPlayer.pointedTile.type);//exception at -1 if the wrong mouse button is used
+					int index = VipixToolBox.sandList.FindIndex(i => i == myPlayer.pointedTile.type);//exception at -1 if the wrong mouse button is used
 					if (index != -1)
 					{
 						if (myPlayer.pointedTileAbove.type == TileID.Cactus) myPlayer.pointedTile.active(false);//cactus on top, only exception to handle ?
 						WorldGen.SquareTileFrame(myPlayer.pointedTileX, myPlayer.pointedTileY, true);
-						myPlayer.pointedTile.type = (ushort)hardenedSandList[index];
+						myPlayer.pointedTile.type = (ushort)VipixToolBox.hardenedSandList[index];
 						myPlayer.pointedTile.active(true);
 					}
 				}
+				NetMessage.SendData(MessageID.TileChange, -1, -1, null, 0, myPlayer.pointedTileX, myPlayer.pointedTileY, 1f, 0, 0, 0);
 				WorldGen.SquareTileFrame(myPlayer.pointedTileX, myPlayer.pointedTileY, true);
-				if (Main.netMode == 1) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
+				if (Main.netMode == NetmodeID.MultiplayerClient) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
 				Main.PlaySound(SoundID.Dig);
 				//Sparkle dust doesn't exist
 				//for (int i = 0; i < 5; i++)
