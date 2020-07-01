@@ -24,6 +24,11 @@ namespace VipixToolBox.Commands
             string displaykeys = "";
             foreach (string i in keys) displaykeys += i + ", ";
 
+            if (args.Length <= 0)
+            {
+                caller.Reply("available tools are " + displaykeys);
+                return;
+            }
             string tool = args[0];
             if (keys.Contains(tool))
             {
@@ -63,7 +68,7 @@ namespace VipixToolBox.Commands
             }
             else
             {
-                throw new UsageException(tool + " does not exist\navailable tools are " + displaykeys);
+                caller.Reply(tool + " does not exist\navailable tools are " + displaykeys);
             }
         }
     }
