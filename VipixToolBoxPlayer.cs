@@ -44,12 +44,14 @@ namespace VipixToolBox
 			pointedTile = Main.tile[pointedTileX, pointedTileY];
 			pointedTileAbove = Main.tile[pointedTileX, pointedTileY - 1];
 		}
+
 		public override TagCompound Save()
 		{
 			return new TagCompound {
 				{"centerUI", centerUI}
 			};
 		}
+
 		public override void Load(TagCompound tag)
 		{
 			treeList = new List<int>();

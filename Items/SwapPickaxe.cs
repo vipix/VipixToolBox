@@ -74,7 +74,7 @@ namespace VipixToolBox.Items
             //this method determines if the pointed block is buildable and in range of the player
             //it shows the item icon if true
             //and it allows the actions in CanUseItem
-            VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
+            VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
             toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
             //Main.NewText(validBlocks.Contains(myPlayer.pointedTile.type).ToString());
             if (Vector2.Distance(player.position, myPlayer.pointerCoord) < toolRange * 16 &&
@@ -93,14 +93,14 @@ namespace VipixToolBox.Items
 
         public override bool CanUseItem(Player player)
         {
-            VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
+            VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 
             return true;
         }
 
         public override bool UseItem(Player player)
         {
-            VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(mod);
+            VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 
             if (operationAllowed && validBlocks.Contains(myPlayer.pointedTile.type))
             {

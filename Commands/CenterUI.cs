@@ -23,9 +23,8 @@ namespace VipixToolBox.Commands
 
 		public override void Action(CommandCaller caller, string input, string[] args)
 		{
-			Mod myMod = ModLoader.GetMod("VipixToolBox");
-			Player player = Main.player[Main.myPlayer];
-			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(myMod);
+			Player player = caller.Player;
+			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 			/*
 			bool choice;
 			if (!bool.TryParse(args[0], out choice))

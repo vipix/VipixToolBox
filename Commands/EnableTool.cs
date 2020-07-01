@@ -30,7 +30,7 @@ namespace VipixToolBox.Commands
     public override void Action(CommandCaller caller, string input, string[] args)
     {
       Mod myMod = ModLoader.GetMod("VipixToolBox");
-      Player player = Main.player[Main.myPlayer];
+      Player player = Main.LocalPlayer;
       bool allTools = false;
       var keys = new List<string>(VipixToolBoxWorld.toolEnabled.Keys);
       string displaykeys = "";
