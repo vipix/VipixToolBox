@@ -95,7 +95,6 @@ namespace VipixToolBox.UI
 		}
 		public void ButtonClicked(int index)
 		{
-			Mod myMod = ModLoader.GetMod("VipixToolBox");
 			Player player = Main.LocalPlayer;
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 			Tile tile = Main.tile[myPlayer.tileX,myPlayer.tileY];
@@ -127,8 +126,9 @@ namespace VipixToolBox.UI
 				tile.slope(0);
 				break;
 			}
+			WorldGen.KillTile(myPlayer.tileX, myPlayer.tileY, fail: true, effectOnly: true); //The dust spawning from the block if it has one
 			WorldGen.SquareTileFrame(myPlayer.tileX,myPlayer.tileY, true);
-			if (Main.netMode == 1) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
+			if (Main.netMode == NetmodeID.MultiplayerClient) NetMessage.SendTileSquare(-1, myPlayer.tileX, myPlayer.tileY, 1);
 			Main.PlaySound(SoundID.Dig);//hammer sound too
 			//Sparkle dust doesn't exist
 			//for (int i = 0; i < 5; i++)
