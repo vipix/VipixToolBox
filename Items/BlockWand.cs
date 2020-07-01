@@ -147,10 +147,11 @@ namespace VipixToolBox.Items
 						WorldGen.SquareTileFrame(myPlayer.pointedTileX, myPlayer.pointedTileY, true);
 						if (Main.netMode == 1) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);//player, X, Y, square "diameter". -1 as the player equals all ?
 						Main.PlaySound(SoundID.Dig);
-						for (int j = 0; j < 5; j++)
-						{
-							int dust = Dust.NewDust(new Vector2((myPlayer.pointedTileX-1) * 16,(myPlayer.pointedTileY-1) * 16), 40, 40, mod.DustType("Sparkle"));
-						}
+						//Dust doesn't exist
+						//for (int j = 0; j < 5; j++)
+						//{
+						//	int dust = Dust.NewDust(new Vector2((myPlayer.pointedTileX-1) * 16,(myPlayer.pointedTileY-1) * 16), 40, 40, ModContent.DustType<Sparkle>());
+						//}
 					}
 				}
 				return true;

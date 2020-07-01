@@ -32,10 +32,10 @@ namespace VipixToolBox.Tiles
 			//TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
 			//TileObjectData.newAlternate.AnchorWall = true;
 			//TileObjectData.newTile.AnchorBottom = new AnchorData(AnchorType.SolidTile, TileObjectData.newTile.Width, 0);
-			//dustType = mod.DustType("Sparkle");
-			//drop = mod.ItemType("FlyingBlock");
+			//dustType = ModContent.DustType<Sparkle>();
+			//drop = ModContent.ItemType<FlyingBlock>();
 			//AddMapEntry(new Color(200, 200, 200));
-			TileObjectData.newTile.HookCheck = new PlacementHook(mod.GetTileEntity("FlyingBlockTE").Hook_AfterPlacement, -1, 0, false);
+			TileObjectData.newTile.HookCheck = new PlacementHook(ModContent.GetInstance<FlyingBlockTE>().Hook_AfterPlacement, -1, 0, false);
 			//TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(mod.GetTileEntity<FlyingBlockTE>().Hook_AfterPlacement, -1, 0, false);
 			TileObjectData.addTile(Type);
 		}

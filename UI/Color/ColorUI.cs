@@ -151,7 +151,6 @@ namespace VipixToolBox.UI
 		public override void Update(GameTime gametime)
 		{
 			//setting the palette at the mouse position
-			Mod myMod = ModLoader.GetMod("VipixToolBox");
 			Player player = Main.LocalPlayer;
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 			if (myPlayer.centerUI == 1)
@@ -208,7 +207,6 @@ namespace VipixToolBox.UI
 		public bool dragging = false;
 		private void DragStart(UIMouseEvent evt, UIElement listeningElement)
 		{
-			Mod myMod = ModLoader.GetMod("VipixToolBox");
 			Player player = Main.LocalPlayer;
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 			if (myPlayer.centerUI == 2)

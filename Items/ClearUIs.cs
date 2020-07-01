@@ -10,10 +10,9 @@ namespace VipixToolBox.Items
   {
     public override void HoldItem(Item item, Player player) //the only ways to make the UI disappear: click on a button or switch item (with this hook)
     {
-      Mod myMod = ModLoader.GetMod("VipixToolBox");
-      if (item.type != mod.ItemType("ColorPalette")) ColorUI.visible = false;
-      if (item.type != mod.ItemType("AutoHammer")) HammerUI.visible = false;
-      if (item.type != mod.ItemType("BlockWand")) BlockUI.visible = false;
+      if (item.type != ModContent.ItemType<ColorPalette>()) ColorUI.visible = false;
+      if (item.type != ModContent.ItemType<AutoHammer>()) HammerUI.visible = false;
+      if (item.type != ModContent.ItemType<BlockWand>()) BlockUI.visible = false;
       if (item.type != ItemID.StaffofRegrowth) MossUI.visible = false;
     }
   }

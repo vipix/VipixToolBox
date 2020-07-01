@@ -130,11 +130,12 @@ namespace VipixToolBox.UI
 			WorldGen.SquareTileFrame(myPlayer.tileX,myPlayer.tileY, true);
 			if (Main.netMode == 1) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
 			Main.PlaySound(SoundID.Dig);//hammer sound too
-			for (int i = 0; i < 5; i++)
-			{
-				int dust = Dust.NewDust(new Vector2((myPlayer.tileX-1) * 16,(myPlayer.tileY-1) * 16), 40, 40, myMod.DustType("Sparkle"));
-				//I don't know how to change the color according to the block (white dust for snow) SIMPLY
-			}
+			//Sparkle dust doesn't exist
+			//for (int i = 0; i < 5; i++)
+			//{
+			//	int dust = Dust.NewDust(new Vector2((myPlayer.tileX-1) * 16,(myPlayer.tileY-1) * 16), 40, 40, ModContent.DustType<Sparkle>());
+			//	//I don't know how to change the color according to the block (white dust for snow) SIMPLY
+			//}
 			visible = false;
 		}
 

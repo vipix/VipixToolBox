@@ -104,10 +104,11 @@ namespace VipixToolBox.Items
 				WorldGen.SquareTileFrame(myPlayer.pointedTileX, myPlayer.pointedTileY, true);
 				if (Main.netMode == 1) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
 				Main.PlaySound(SoundID.Dig);
-				for (int i = 0; i < 5; i++)
-				{
-					int dust = Dust.NewDust(new Vector2((myPlayer.pointedTileX-1) * 16,(myPlayer.pointedTileY-1) * 16), 40, 40, mod.DustType("Sparkle"));
-				}
+				//Sparkle dust doesn't exist
+				//for (int i = 0; i < 5; i++)
+				//{
+				//	int dust = Dust.NewDust(new Vector2((myPlayer.pointedTileX-1) * 16,(myPlayer.pointedTileY-1) * 16), 40, 40, ModContent.DustType<Sparkle>());
+				//}
 			}
 			//return base.CanUseItem(player);
 			return player.ownedProjectileCounts[item.shoot] < 1; // This is to ensure the spear doesn't bug out when using autoReuse = true

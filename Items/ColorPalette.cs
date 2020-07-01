@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using VipixToolBox.UI;
+using VipixToolBox.Items.PaintIcons;
 
 namespace VipixToolBox.Items
 {
@@ -59,16 +60,16 @@ namespace VipixToolBox.Items
 				switch (myPlayer.paintStatus)
 				{
 					case 0:
-					player.showItemIcon2 = mod.ItemType("tilePaintIcon");
+					player.showItemIcon2 = ModContent.ItemType<tilePaintIcon>();
 					break;
 					case 1:
-					player.showItemIcon2 = mod.ItemType("wallPaintIcon");
+					player.showItemIcon2 = ModContent.ItemType<wallPaintIcon>();
 					break;
 					case 2:
-					player.showItemIcon2 = mod.ItemType("tileEraseIcon");
+					player.showItemIcon2 = ModContent.ItemType<tileEraseIcon>();
 					break;
 					case 3:
-					player.showItemIcon2 = mod.ItemType("wallEraseIcon");
+					player.showItemIcon2 = ModContent.ItemType<wallEraseIcon>();
 					break;
 				}
 			}

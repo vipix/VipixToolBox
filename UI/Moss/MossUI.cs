@@ -63,7 +63,6 @@ namespace VipixToolBox.UI
 		public override void Update(GameTime gametime)
 		{
 			//setting the UI at the mouse position
-			Mod myMod = ModLoader.GetMod("VipixToolBox");
 			Player player = Main.LocalPlayer;
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 			if (myPlayer.centerUI == 1)
