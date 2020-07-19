@@ -1,5 +1,5 @@
 author = vipix
-version = 1.4.1
+version = 1.4.2
 displayName = VipixToolbox
 buildIgnore = *.psd, *.template, *.csproj, *.csproj.user, *.zip, *.user, obj\*, bin\*, .vs\*, *.txt, archive\*, .git\, *.gitignore
 includePDB = true
