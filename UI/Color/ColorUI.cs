@@ -151,9 +151,8 @@ namespace VipixToolBox.UI
 		public override void Update(GameTime gametime)
 		{
 			//setting the palette at the mouse position
-			Mod myMod = ModLoader.GetMod("VipixToolBox");
-			Player player = Main.player[Main.myPlayer];
-			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(myMod);
+			Player player = Main.LocalPlayer;
+			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 			if (myPlayer.centerUI == 1)
 			{
 				backgroundPanel.Left.Set(myPlayer.tbMouseX - panelWidth/2 ,0f);//exceeding the coordinates of the screen seems already handled
@@ -173,11 +172,10 @@ namespace VipixToolBox.UI
 		{
 			//Main.NewText(colorList[index].Left.Get().ToString(),255,255,255);
 			//colorList[index].UIImageButtonTexture.Set();
-			Mod myMod = ModLoader.GetMod("VipixToolBox");
-			Player player = Main.player[Main.myPlayer];
-			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(myMod);
+			Player player = Main.LocalPlayer;
+			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 			//color button
-			player.GetModPlayer<VipixToolBoxPlayer>(myMod).colorByte = (byte)index;
+			myPlayer.colorByte = (byte)index;
 			visible = false;
 		}
 		public void DisableColor(int index)
@@ -192,13 +190,12 @@ namespace VipixToolBox.UI
 		}
 		public void ToolClicked(int index)
 		{
-			Mod myMod = ModLoader.GetMod("VipixToolBox");
-			Player player = Main.player[Main.myPlayer];
-			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(myMod);
+			Player player = Main.LocalPlayer;
+			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 			if (index >=0 && index < 4)
 			{
 				//tool button
-				player.GetModPlayer<VipixToolBoxPlayer>(myMod).paintStatus = index;
+				myPlayer.paintStatus = index;
 			}
 			else if (index == 4)
 			{
@@ -210,9 +207,8 @@ namespace VipixToolBox.UI
 		public bool dragging = false;
 		private void DragStart(UIMouseEvent evt, UIElement listeningElement)
 		{
-			Mod myMod = ModLoader.GetMod("VipixToolBox");
-			Player player = Main.player[Main.myPlayer];
-			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(myMod);
+			Player player = Main.LocalPlayer;
+			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 			if (myPlayer.centerUI == 2)
 			{
 				offset = new Vector2(evt.MousePosition.X - backgroundPanel.Left.Pixels, evt.MousePosition.Y - backgroundPanel.Top.Pixels);

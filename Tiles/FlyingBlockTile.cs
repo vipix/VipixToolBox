@@ -31,16 +31,16 @@ namespace VipixToolBox.Tiles
 
 			//TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
 			//dustType = ;
-			//drop = mod.ItemType("FlyingBlock");
+			//drop = ModContent.ItemType<FlyingBlock>();
 			//AddMapEntry(new Color(200, 200, 200));
-			TileObjectData.newTile.HookCheck = new PlacementHook(mod.GetTileEntity("FlyingBlockTE").Hook_AfterPlacement, -1, 0, false);
+			TileObjectData.newTile.HookCheck = new PlacementHook(ModContent.GetInstance<FlyingBlockTE>().Hook_AfterPlacement, -1, 0, false);
 			//TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(mod.GetTileEntity<FlyingBlockTE>().Hook_AfterPlacement, -1, 0, false);
 			TileObjectData.addTile(Type);
 		}
 		public override void PlaceInWorld (int i, int j, Item item)
 		{
 			//in case the block is placed manually
-			int id = mod.GetTileEntity<FlyingBlockTE>().Find(i, j);
+			int id = ModContent.GetInstance<FlyingBlockTE>().Find(i, j);
 			//looking for the ID of the tileEntity we just placed
 			//because there is no tileEntity hook for after placement
 			if (id != -1)
@@ -52,7 +52,7 @@ namespace VipixToolBox.Tiles
 				myTE.tileY = j;
 			}
 		}
-		public override void RightClick(int i, int j)
+		public override bool NewRightClick(int i, int j)
 		{/*
 			int id = mod.GetTileEntity<FlyingBlockTE>().Find(i, j);
 			if (id != -1)
@@ -61,6 +61,7 @@ namespace VipixToolBox.Tiles
 				Main.NewText(myTE.timer.ToString(),255,255,255);
 			}
 			else Main.NewText("Nothing",255,255,255);*/
+			return false;
 		}
 	}
 }

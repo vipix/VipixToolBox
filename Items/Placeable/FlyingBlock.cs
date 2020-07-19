@@ -1,6 +1,7 @@
 ﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using VipixToolBox.Tiles;
 
 namespace VipixToolBox.Items.Placeable
 {
@@ -21,9 +22,9 @@ namespace VipixToolBox.Items.Placeable
 			item.autoReuse = true;
 			item.useAnimation = 15;
 			item.useTime = 10;
-			item.useStyle = 1;
+			item.useStyle = ItemUseStyleID.SwingThrow;
 			item.consumable = true;
-			item.createTile = mod.TileType("FlyingBlockTile");
+			item.createTile = ModContent.TileType<FlyingBlockTile>();
 		}
 
 		public override void AddRecipes()

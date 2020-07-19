@@ -77,9 +77,8 @@ namespace VipixToolBox.UI
 		public override void Update(GameTime gametime)
 		{
 			//setting the UI at the mouse position
-			Mod myMod = ModLoader.GetMod("VipixToolBox");
-			Player player = Main.player[Main.myPlayer];
-			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(myMod);//well that looks complicated
+			Player player = Main.LocalPlayer;
+			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();//well that looks complicated
 			if (myPlayer.centerUI == 1)
 			{
 				backgroundPanel.Left.Set(myPlayer.tbMouseX - panelWidth/2 ,0f);//exceeding the coordinates of the screen seems already handled
@@ -96,9 +95,8 @@ namespace VipixToolBox.UI
 		}
 		public void ButtonClicked(int index)
 		{
-			Mod myMod = ModLoader.GetMod("VipixToolBox");
-			Player player = Main.player[Main.myPlayer];
-			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>(myMod);
+			Player player = Main.LocalPlayer;
+			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 			Tile tile = Main.tile[myPlayer.tileX,myPlayer.tileY];
 			//the tile change is done here instead of useItem otherwise you wouldnt have the time to click on the button
 			switch (index)
@@ -128,14 +126,16 @@ namespace VipixToolBox.UI
 				tile.slope(0);
 				break;
 			}
+			WorldGen.KillTile(myPlayer.tileX, myPlayer.tileY, fail: true, effectOnly: true); //The dust spawning from the block if it has one
 			WorldGen.SquareTileFrame(myPlayer.tileX,myPlayer.tileY, true);
-			if (Main.netMode == 1) NetMessage.SendTileSquare(-1, myPlayer.pointedTileX, myPlayer.pointedTileY, 1);
+			if (Main.netMode == NetmodeID.MultiplayerClient) NetMessage.SendTileSquare(-1, myPlayer.tileX, myPlayer.tileY, 1);
 			Main.PlaySound(SoundID.Dig);//hammer sound too
-			for (int i = 0; i < 5; i++)
-			{
-				int dust = Dust.NewDust(new Vector2((myPlayer.tileX-1) * 16,(myPlayer.tileY-1) * 16), 40, 40, myMod.DustType("Sparkle"));
-				//I don't know how to change the color according to the block (white dust for snow) SIMPLY
-			}
+			//Sparkle dust doesn't exist
+			//for (int i = 0; i < 5; i++)
+			//{
+			//	int dust = Dust.NewDust(new Vector2((myPlayer.tileX-1) * 16,(myPlayer.tileY-1) * 16), 40, 40, ModContent.DustType<Sparkle>());
+			//	//I don't know how to change the color according to the block (white dust for snow) SIMPLY
+			//}
 			visible = false;
 		}
 

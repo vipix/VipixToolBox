@@ -12,7 +12,6 @@ namespace VipixToolBox
 {
 	public class VipixToolBoxPlayer : ModPlayer
 	{
-		public List<int> treeList;
 		public int centerUI = 1;//could be static but would apply to everyone in multiplayer ? 0 for fixed, 1 for follow mouse, 2 for free
 		//periodic update (for UI and tool needs)
 		public byte colorByte = 1;//for paint tool, 1 is red (not deep red)
@@ -34,29 +33,39 @@ namespace VipixToolBox
 		public int pointedTileY;
 		public Tile pointedTileAbove;//the tile just above the pointed one, potentially useful
 
+		//PreUpdate runs before tileTargetX/Y is set
+		public bool CursorReady => Player.tileTargetX != 0 && Player.tileTargetY != 0;
+
 		public override void PreUpdate()
 		{
-			pointerCoord.X = (float)Main.mouseX + Main.screenPosition.X;
-			if (player.gravDir == 1f) pointerCoord.Y = (float)Main.mouseY + Main.screenPosition.Y;
-			else pointerCoord.Y = Main.screenPosition.Y + (float)Main.screenHeight - (float)Main.mouseY;//handles reversed gravity, yay
-			pointedTileX = (int)(pointerCoord.X / 16f);
-			pointedTileY = (int)(pointerCoord.Y / 16f);
-			pointedTile = Main.tile[pointedTileX, pointedTileY];
-			pointedTileAbove = Main.tile[pointedTileX, pointedTileY - 1];
+			if (Main.netMode != NetmodeID.Server && CursorReady)
+			{
+				pointerCoord = Main.MouseWorld;
+				//Point point = Main.MouseWorld.ToTileCoordinates();
+				//pointedTileX = point.X;
+				//pointedTileY = point.Y;
+
+				//SmartCursor support
+				Point point = new Point(Player.tileTargetX, Player.tileTargetY);
+				pointedTileX = point.X;
+				pointedTileY = point.Y;
+
+				pointedTile = Framing.GetTileSafely(point);
+				//Main.NewText("calc: " + point);
+				//Main.NewText("targ: " + new Point(Player.tileTargetX, Player.tileTargetY));
+				pointedTileAbove = Framing.GetTileSafely(point.X, point.Y - 1);
+			}
 		}
+
 		public override TagCompound Save()
 		{
 			return new TagCompound {
 				{"centerUI", centerUI}
 			};
 		}
+
 		public override void Load(TagCompound tag)
 		{
-			treeList = new List<int>();
-			treeList.Add(TileID.Trees);
-			treeList.Add(TileID.MushroomTrees);
-			treeList.Add(TileID.ChristmasTree);
-			treeList.Add(TileID.PalmTree);
 			centerUI = tag.GetInt("centerUI");
 		}
 		public override void ResetEffects()

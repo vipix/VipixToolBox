@@ -33,7 +33,7 @@ namespace VipixToolBox.Tiles
 				{
 					isDead = true;
 					Main.tile[tileX,tileY].active(false);
-					if (Main.netMode == 1) NetMessage.SendTileSquare(-1, tileX,tileY, 1);
+					if (Main.netMode == NetmodeID.MultiplayerClient) NetMessage.SendTileSquare(-1, tileX,tileY, 1);
 					Main.PlaySound(SoundID.Grass);
 					//WorldGen.SquareTileFrame(tileX,tileY+1, true);
 					//no proper worldgen update, so that objects keep flying
@@ -44,7 +44,7 @@ namespace VipixToolBox.Tiles
 		public override bool ValidTile(int i, int j)
 		{
 			Tile tile = Main.tile[i, j];
-			//return tile.active() && tile.type == mod.TileType("FlyingBlock") && tile.frameX == 0 && tile.frameY == 0;
+			//return tile.active() && tile.type == ModContent.TileType<FlyingBlock>() && tile.frameX == 0 && tile.frameY == 0;
 			return tile.active() && tile.type == TileID.Dirt && tile.frameX == 0 && tile.frameY == 0;
 		}
 		public override int Hook_AfterPlacement(int i, int j, int type, int style, int direction)
