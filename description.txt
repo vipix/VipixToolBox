@@ -16,6 +16,11 @@ Modified items:
 - Staff of regrowth (moss color interface)
 
 ------------
+v1.4.2
+- improved multiplayer support
+- made fargo support more reliable
+- fixed multiple issues (commands, autohammer in mp, UI scaling with zoom, crashes)
+- added proper cursor access everywhere (including smart)
 v1.4.1
 - Staff of Regrowth fixed
 - Multiplayer enabled
