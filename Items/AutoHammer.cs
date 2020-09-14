@@ -44,7 +44,7 @@ namespace VipixToolBox.Items
 				myPlayer.pointedTileAbove.type != TileID.Trees &&
 				Vector2.Distance(player.Center, myPlayer.pointerCoord) < toolRange * 16 &&
 				Main.tileSolid[myPlayer.pointedTile.type] &&
-				VipixToolBoxWorld.toolEnabled["AutoHammer"])
+				ServerConfig.Instance.AutoHammer)
 				{
 					//no edit under tree, probably other exceptions to add
 					//empty tile is considered solid by Main.tileSolid, need to combine with tile.active()

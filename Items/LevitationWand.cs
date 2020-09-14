@@ -55,7 +55,7 @@ namespace VipixToolBox.Items
 				if (Vector2.Distance(player.Center, myPlayer.pointerCoord) < toolRange * 16 &&
 				!myPlayer.pointedTile.active() || !Main.tileSolid[myPlayer.pointedTile.type] &&
 				!VipixToolBox.treeList.Contains(myPlayer.pointedTile.type) &&
-				VipixToolBoxWorld.toolEnabled["LevitationWand"])
+				ServerConfig.Instance.LevitationWand)
 				{
 					operationAllowed = true;
 					player.showItemIcon = true;
