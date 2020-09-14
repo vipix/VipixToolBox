@@ -16,7 +16,8 @@ namespace VipixToolBox.Items
         }
         public override bool CanUseItem(Item item, Player player)
         {
-            if (item.type == ItemID.StaffofRegrowth && VipixToolBoxWorld.toolEnabled["StaffofRegrowthEdit"])
+            if (item.type == ItemID.StaffofRegrowth &&
+                ServerConfig.Instance.StaffofRegrowthEdit)
             {
                 bool moddedStaff = false;
                 VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();

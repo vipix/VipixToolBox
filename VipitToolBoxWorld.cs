@@ -8,6 +8,7 @@ using System.IO;
 
 namespace VipixToolBox
 {
+    /*
     class VipixToolBoxWorld : ModWorld
     {
         public static Dictionary<string, bool> toolEnabled;
@@ -82,4 +83,5 @@ namespace VipixToolBox
             toolEnabled["WallHammer"] = tag.GetBool("WallHammer");
         }
     }
+    */
 }

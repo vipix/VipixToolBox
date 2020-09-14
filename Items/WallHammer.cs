@@ -32,13 +32,14 @@ namespace VipixToolBox.Items
 			item.UseSound = SoundID.Item1;
 			item.autoReuse = true;
 		}
-		public override void HoldItem (Player player)
+		public override void HoldItem(Player player)
 		{
 			if (Main.netMode != NetmodeID.Server)
 			{
 				VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 				toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
-				if (Vector2.Distance(player.Center, myPlayer.pointerCoord) < toolRange * 16 && VipixToolBoxWorld.toolEnabled["WallHammer"])
+				if (Vector2.Distance(player.Center, myPlayer.pointerCoord) < toolRange * 16 &&
+					ServerConfig.Instance.WallHammer)
 				{
 					operationAllowed = true;
 					player.showItemIcon = true;

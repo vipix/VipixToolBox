@@ -38,20 +38,22 @@ namespace VipixToolBox.Items
 		{
 			return true;
 		}
-		public override void HoldItem (Player player)
+		public override void HoldItem(Player player)
 		{
 			VipixToolBoxPlayer myPlayer = player.GetModPlayer<VipixToolBoxPlayer>();
 			if (Main.netMode != NetmodeID.Server && myPlayer.CursorReady)
 			{
 				//for showing the icon when an action is allowed
 				toolRange = Math.Max(baseRange, myPlayer.fargoRange);//blocks
-				if (Vector2.Distance(player.Center, myPlayer.pointerCoord) < toolRange * 16 && myPlayer.spotlight && VipixToolBoxWorld.toolEnabled["ColorPalette"])
+				if (Vector2.Distance(player.Center, myPlayer.pointerCoord) < toolRange * 16 &&
+					myPlayer.spotlight &&
+					ServerConfig.Instance.ColorPalette)
 				{
 					Lighting.AddLight(myPlayer.pointerCoord, 2f, 2f, 2f);
 				}
 				if (Vector2.Distance(player.Center, myPlayer.pointerCoord) < toolRange * 16 &&
 				(myPlayer.pointedTile.active() || myPlayer.pointedTile.wall != 0) &&
-				VipixToolBoxWorld.toolEnabled["ColorPalette"])
+				ServerConfig.Instance.ColorPalette)
 				{
 					player.showItemIcon = true;
 					operationAllowed = true;

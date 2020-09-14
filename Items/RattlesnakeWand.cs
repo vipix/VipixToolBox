@@ -56,7 +56,7 @@ namespace VipixToolBox.Items
 
 				if (Vector2.Distance(player.Center, myPlayer.pointerCoord) < toolRange * 16 &&
 				(VipixToolBox.sandList.Contains(myPlayer.pointedTile.type) || VipixToolBox.hardenedSandList.Contains(myPlayer.pointedTile.type)) &&
-				VipixToolBoxWorld.toolEnabled["RattlesnakeWand"])
+				ServerConfig.Instance.RattlesnakeWand)
 				{
 					operationAllowed = true;
 					player.showItemIcon = true;

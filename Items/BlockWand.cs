@@ -69,7 +69,7 @@ namespace VipixToolBox.Items
 				if (Vector2.Distance(player.Center, myPlayer.pointerCoord) < toolRange * 16 &&
 				(!myPlayer.pointedTile.active() || !Main.tileSolid[myPlayer.pointedTile.type] && !VipixToolBox.treeList.Contains(myPlayer.pointedTile.type)) &&
 				(okTop || okBot || okLeft || okRight || myPlayer.pointedTile.wall != 0) &&
-				VipixToolBoxWorld.toolEnabled["BlockWand"])
+				ServerConfig.Instance.BlockWand)
 				{
 					operationAllowed = true;
 					player.showItemIcon = true;

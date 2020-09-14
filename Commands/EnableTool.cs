@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace VipixToolBox.Commands
 {
+    /*
     public class EnableTool : ModCommand
     {
         public override CommandType Type => CommandType.World;
@@ -59,7 +60,7 @@ namespace VipixToolBox.Commands
                 }
                 if (tool == "all")
                 {
-                    bool temp = VipixToolBoxWorld.toolEnabled["all"];//can't make a foreach and modify the list within the foreach
+                    bool temp = ServerConfig.Instance.all;//can't make a foreach and modify the list within the foreach
                     for (int i = 0; i < keys.Count; i++)
                     {
                         VipixToolBoxWorld.toolEnabled[keys[i]] = temp;
@@ -72,4 +73,5 @@ namespace VipixToolBox.Commands
             }
         }
     }
+    */
 }
