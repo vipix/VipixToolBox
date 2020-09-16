@@ -24,40 +24,40 @@ namespace VipixToolBox
 
 		public static ServerConfig Instance => ModContent.GetInstance<ServerConfig>();
 
-		[Header("Toggle Tools Functionality")]
+		[Header("Toggle tools functionality")]
 
-		[Label("Auto Hammer")]
-		[Tooltip("Toggle Auto Hammer Functionality")]
+		[Label("Smartammer")]
+		[Tooltip("Toggle Smartammer functionality")]
 		[DefaultValue(true)]
 		public bool AutoHammer;
 
-		[Label("Block Wand")]
-		[Tooltip("Toggle Block Wand Functionality")]
+		[Label("Greater Wand")]
+		[Tooltip("Toggle Greater Wand functionality")]
 		[DefaultValue(true)]
 		public bool BlockWand;
 
 		[Label("Color Palette")]
-		[Tooltip("Toggle Color Palette Functionality")]
+		[Tooltip("Toggle Color Palette functionality")]
 		[DefaultValue(true)]
 		public bool ColorPalette;
 
-		[Label("Levitation Wand")]
-		[Tooltip("Toggle Levitation Wand Functionality")]
+		[Label("Unstable Staff")]
+		[Tooltip("Toggle Unstable Staff functionality")]
 		[DefaultValue(true)]
 		public bool LevitationWand;
 
 		[Label("Rattlesnake Wand")]
-		[Tooltip("Toggle Rattlesnake Wand Functionality")]
+		[Tooltip("Toggle Rattlesnake Wand functionality")]
 		[DefaultValue(true)]
 		public bool RattlesnakeWand;
 
-		[Label("Staff of Regrowth Edit")]
-		[Tooltip("Toggle Staff of Regrowth Edit Functionality")]
+		[Label("Improved Staff of Regrowth")]
+		[Tooltip("Toggle improved Staff of Regrowth functionality")]
 		[DefaultValue(true)]
 		public bool StaffofRegrowthEdit;
 
 		[Label("Wall Hammer")]
-		[Tooltip("Toggle Wall Hammer Functionality")]
+		[Tooltip("Toggle Wall Hammer functionality")]
 		[DefaultValue(true)]
 		public bool WallHammer;
 
@@ -84,7 +84,7 @@ namespace VipixToolBox
 			if (Main.netMode == NetmodeID.SinglePlayer) return true;
 			else if (!IsPlayerLocalServerOwner(whoAmI))
 			{
-				message = "You are not the server owner so you can not change this config";
+				message = "Only the server owner is allowed to make changes to this config";
 				return false;
 			}
 			return base.AcceptClientChanges(pendingConfig, whoAmI, ref message);
