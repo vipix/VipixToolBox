@@ -16,6 +16,9 @@ Modified items:
 - Staff of regrowth (moss color interface)
 
 ------------
+v1.4.3
+- replaced the obsolete command-based toggle tool by the Server Config feature of TModloader
+- fixed multiplayer issue where the client could get stuck indefinitely joining a server
 v1.4.2
 - improved multiplayer support
 - made fargo support more reliable
